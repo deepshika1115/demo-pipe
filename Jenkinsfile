@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Pulling code from Git..."
-                checkout scm
+                git 'https://github.com/YOUR-USERNAME/YOUR-REPO.git'
             }
         }
 
@@ -13,26 +13,16 @@ pipeline {
             steps {
                 echo "Installing dependencies..."
                 
-                // For Node.js
                 sh '''
                   if [ -f package.json ]; then
-                     echo "Node project detected"
                      npm install
                   fi
-                '''
 
-                // For Python
-                sh '''
                   if [ -f requirements.txt ]; then
-                     echo "Python project detected"
                      pip install -r requirements.txt
                   fi
-                '''
 
-                // For Maven (Java)
-                sh '''
                   if [ -f pom.xml ]; then
-                     echo "Maven project detected"
                      mvn install -DskipTests
                   fi
                 '''
